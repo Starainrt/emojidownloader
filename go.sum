@@ -1,0 +1,15 @@
+b612.me/starainrt v1.0.0 h1:bFcbdaCZett9SKWSI1gNlu4EEmdsH5rqXlNgXVxbFJY=
+b612.me/starainrt v1.0.0/go.mod h1:BOOxSfIUc/uP4sfLVLGsqNWXeQrueFBhp9hS6izogIs=
+b612.me/starnet v0.0.0-20201019130456-b02c1f0a81e8 h1:gapG4PGqW8PVFs82bfMC05RMOq9JJXjFI9HhYhYL8KU=
+b612.me/starnet v0.0.0-20201019130456-b02c1f0a81e8/go.mod h1:g/1G23KL33TZsl1knYOm/BptBW2LKZSUt2+Bks06lJk=
+b612.me/staros v0.0.0-20200821031748-26da8c8b88fe h1:VCzxAOlMcm7wqMYzyscltur0uhd4N/CcOPAcBEWSBms=
+b612.me/staros v0.0.0-20200821031748-26da8c8b88fe/go.mod h1:XjB5NU0S0GGRIbnljrfDyVHfb59IGKb+XdMd5qEod48=
+b612.me/win32api v0.0.0-20190311065438-739e939fc377 h1:G1GrET2vEuOvfw12VkchPZk/AXzJNKiXFXybFDvoKP8=
+b612.me/win32api v0.0.0-20190311065438-739e939fc377/go.mod h1:pe/JmVhTRavZVLkzWZ0c7popmvZHt1qsNL3K5aIqyfs=
+b612.me/win32api v0.0.0-20201019131449-7e2261bca5be h1:HY+rnnC6G4fVM+jKSIpLueg2CqqF8qX3YMN4l77J/l0=
+b612.me/win32api v0.0.0-20201019131449-7e2261bca5be/go.mod h1:pe/JmVhTRavZVLkzWZ0c7popmvZHt1qsNL3K5aIqyfs=
+b612.me/wincmd v0.0.0-20190311065606-3a859d6dc39d h1:mENf2qwFDRr9hxlF/Kk53N2Ges+BGtrPmCeutsbHEXE=
+b612.me/wincmd v0.0.0-20190311065606-3a859d6dc39d/go.mod h1:ymyXdgLlNXkzSFlAJMrG7J5gkFEsLi0jcJvGucAZHWk=
+b612.me/wincmd v0.0.0-20201019131715-a740486e2c02 h1:EXWblKgM1Qcqg1t8qrkAG7hUPHVYqCdU+ZFreXMzw6c=
+b612.me/wincmd v0.0.0-20201019131715-a740486e2c02/go.mod h1:ymyXdgLlNXkzSFlAJMrG7J5gkFEsLi0jcJvGucAZHWk=
+golang.org/x/sys v0.0.0-20201018230417-eeed37f84f13/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
