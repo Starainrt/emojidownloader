@@ -6,7 +6,7 @@ import (
 	"golang.org/x/crypto/ssh/terminal"
 )
 
-var version = "v0.1.0"
+const VERSION = "v0.1.0"
 
 func main() {
 	if len(os.Args) == 1 && terminal.IsTerminal(0) {

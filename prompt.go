@@ -10,7 +10,11 @@ import (
 	"b612.me/starlog"
 )
 
-var showFn = func(v Emoji, finished bool) {
+var showFn = func(v Emoji, finished bool, err error) {
+	if err != nil {
+		starlog.Errorf("下载出错 分类:%-10s emoji:%s error:%v\n", v.Category, v.ShortCode, err)
+		return
+	}
 	if !finished {
 		starlog.Noticef("开始下载 分类:%-10s emoji:%s \n", v.Category, v.ShortCode)
 		return
@@ -35,7 +39,8 @@ func PromotMode() {
 func plParseJson(emo *Emojis) int {
 	var fromSite bool
 	var fpath string
-	fmt.Println("当前为交互模式，如果您想使用命令行模式，请执行--help查看用法\n")
+	fmt.Println("mastodon emoji downloader " + VERSION)
+	fmt.Println("当前为交互模式，如果您想使用命令行模式，请执行--help查看用法\n\n")
 	fmt.Println("今天您想要来点什么？")
 	fmt.Println("1.从url下载mastodon emoji\n")
 	fmt.Println("2.从json下载mastodon emoji\n")
@@ -154,7 +159,7 @@ func plDownload(emo *Emojis) int {
 		}
 		break
 	}
-	var fn func(v Emoji, finished bool) = nil
+	var fn func(v Emoji, finished bool, err error) = nil
 	if stario.YesNo("是否显示下载日志？(Y/n)", true) {
 		fn = showFn
 	}

@@ -81,35 +81,37 @@ func (e *Emojis) filterName(name string) bool {
 }
 
 func (e *Emojis) generateRequest(url string, data []byte, nettype string) starnet.Request {
-	req := starnet.NewRequests(url, nil, "GET", starnet.WithProxy(e.Proxy), starnet.WithUserAgent("b612 emoji downloader "+version))
+	req := starnet.NewRequests(url, nil, "GET", starnet.WithProxy(e.Proxy), starnet.WithUserAgent("b612 emoji downloader "+VERSION))
 	if e.AuthCookie != "" {
 		req.AddSimpleCookie("_session_id", e.AuthCookie)
 	}
 	return req
 }
 
-func (e *Emojis) Download(fns ...func(v Emoji, finished bool)) error {
+func (e *Emojis) Download(fns ...func(v Emoji, finished bool, err error)) error {
 	SetUmask(0)
 	defer UnsetUmask()
-	var fn func(v Emoji, finished bool) = nil
+	var fn func(v Emoji, finished bool, err error) = nil
 	if len(fns) != 0 {
 		fn = fns[0]
 	}
 	req := e.generateRequest("", nil, "GET")
 	download := func(d Emoji) error {
 		if fn != nil {
-			fn(d, false)
+			fn(d, false, nil)
 		}
 		savePath := filepath.Join(e.SaveFolders, d.Category)
 		if !staros.Exists(d.Category) {
 			err := os.MkdirAll(savePath, 0755)
 			if err != nil {
+				fn(d, false, err)
 				return err
 			}
 		}
 		req.Url = d.Url
 		data, err := starnet.Curl(req)
 		if err != nil {
+			fn(d, false, err)
 			return err
 		}
 		dstPath := filepath.Join(savePath, e.replaceName(d.ShortCode)+path.Ext(d.Url))
@@ -120,13 +122,14 @@ func (e *Emojis) Download(fns ...func(v Emoji, finished bool)) error {
 				e.zipMaps[d.Category], err = NewTar(filepath.Join(e.SaveFolders, d.Category+".tar.gz"))
 				if err != nil {
 					delete(e.zipMaps, d.Category)
+					fn(d, false, err)
 					return err
 				}
 			}
 			e.zipMaps[d.Category].AddFile(dstPath, filepath.Base(dstPath))
 		}
 		if fn != nil {
-			fn(d, true)
+			fn(d, true, err)
 		}
 		return err
 	}
