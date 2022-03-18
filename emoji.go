@@ -138,6 +138,9 @@ func (e *Emojis) Download(fns ...func(v Emoji, finished bool, err error)) error 
 	var err error
 exitfor:
 	for _, v := range e.Lists {
+		if v.Category == "" {
+			v.Category = "未分类"
+		}
 		if len(e.AllowCategories) == 0 || e.AllowCategories[v.Category] {
 			if !e.filterName(v.ShortCode) {
 				continue

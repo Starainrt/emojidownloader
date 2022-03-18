@@ -28,12 +28,14 @@ func PromotMode() {
 	emo := NewEmojis()
 	checkFn := func(fn func(emo *Emojis) int) {
 		if code := fn(emo); code != 0 {
+			stario.StopUntil("出现错误，按任意键结束", "", true)
 			os.Exit(code)
 		}
 	}
 	for _, v := range []func(*Emojis) int{plParseJson, plGetDownloadChoice, plRegexp, plDownload} {
 		checkFn(v)
 	}
+	stario.StopUntil("下载完毕，按任意键退出", "", true)
 }
 
 func plParseJson(emo *Emojis) int {
@@ -98,7 +100,7 @@ func plGetDownloadChoice(emo *Emojis) int {
 	starlog.Green("在%d个分类中共找到%d个表情\n", len(orderSlice), ct)
 exitfor:
 	for {
-		choice, err := stario.MessageBox("请输入您要下载的分类名，多个分类用英文逗号分隔，下载全部直接回车或输入0:", "0").SliceInt(",")
+		choice, err := stario.MessageBox("请输入您要下载的分类名，多个分类用英文逗号分隔，下载全部表情输入0或直接回车:", "0").SliceInt(",")
 		if err != nil {
 			starlog.Errorln("您的输入有误，请输入数字，用英文逗号分隔，请检查后重新输入", err)
 			continue
