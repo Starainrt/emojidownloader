@@ -47,7 +47,7 @@ func plParseJson(emo *Emojis) int {
 	fmt.Println("1.从url下载mastodon emoji\n")
 	fmt.Println("2.从json下载mastodon emoji\n")
 	for {
-		choice := stario.MessageBox("请输入您的选择：", "1").MustInt()
+		choice := stario.MessageBox("请输入您的选择：", "0").MustInt()
 		if choice != 1 && choice != 2 {
 			starlog.Red("请输入1或者2哦，您的输入为%d\n", choice)
 			continue
@@ -100,7 +100,7 @@ func plGetDownloadChoice(emo *Emojis) int {
 	starlog.Green("在%d个分类中共找到%d个表情\n", len(orderSlice), ct)
 exitfor:
 	for {
-		choice, err := stario.MessageBox("请输入您要下载的分类名，多个分类用英文逗号分隔，下载全部表情输入0或直接回车:", "0").SliceInt(",")
+		choice, err := stario.MessageBox("请输入您要下载的分类序号，如需下载多个分类，用英文逗号分隔多个序号，下载全部表情直接回车:", "0").SliceInt(",")
 		if err != nil {
 			starlog.Errorln("您的输入有误，请输入数字，用英文逗号分隔，请检查后重新输入", err)
 			continue
@@ -154,7 +154,7 @@ func plDownload(emo *Emojis) int {
 		emo.DeletedOriginIfZip = stario.YesNo("是否在打包为压缩文件后删除原始的下载文件(Y/n)", true)
 	}
 	for {
-		emo.Threads = stario.MessageBox("并发下载量(默认：4)：", "4").MustInt()
+		emo.Threads = stario.MessageBox("并发下载量(默认：16)：", "16").MustInt()
 		if emo.Threads <= 0 {
 			starlog.Red("输入非法", emo.Threads)
 			continue

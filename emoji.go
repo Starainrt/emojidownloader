@@ -95,7 +95,6 @@ func (e *Emojis) Download(fns ...func(v Emoji, finished bool, err error)) error 
 	if len(fns) != 0 {
 		fn = fns[0]
 	}
-	req := e.generateRequest("", nil, "GET")
 	download := func(d Emoji) error {
 		if fn != nil {
 			fn(d, false, nil)
@@ -108,7 +107,7 @@ func (e *Emojis) Download(fns ...func(v Emoji, finished bool, err error)) error 
 				return err
 			}
 		}
-		req.Url = d.Url
+		req := e.generateRequest(d.Url, nil, "GET")
 		data, err := starnet.Curl(req)
 		if err != nil {
 			fn(d, false, err)
